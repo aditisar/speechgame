@@ -34,6 +34,9 @@ $( document ).ready(function() {
 		expectedAnswer = pickRandomState()
 	});
 
+	$('#startBtn').closest('.ui-btn').hide();
+	$('#stopBtn').closest('.ui-btn').hide();
+
  	$('#hint').hide();
 
 });
