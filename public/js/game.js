@@ -23,14 +23,15 @@ function newGame(){
 	expectedAnswer = pickRandomState()
 }
 
-
-
-
-
-
 $( document ).ready(function() {
 	$('#hintButton').click(function(){
 		$('#hint').toggle();
+	});
+
+	$('#skip').click(function(){
+		score = score - 0.5
+		$('#score').html(score)
+		expectedAnswer = pickRandomState()
 	});
 
  	$('#hint').hide();
