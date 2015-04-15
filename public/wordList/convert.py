@@ -1,6 +1,6 @@
 
 
-def loadDictionary( path='./state-capitals.dict.txt' ):
+def loadDictionary( path='./colorsdict.dict' ):
     dictionary = []
     for line in open( path ):
     	line = line[:-1] #get rid of newline
@@ -45,7 +45,7 @@ file.write(gt)
 file.close()
 
 
-def makeInto2DArray( path='./stateandcapital.txt' ):
+def makeInto2DArray( path='./colors.txt' ):
     statecapitals = []
     for line in open( path ):
     	line = line[:-1] #get rid of newline
