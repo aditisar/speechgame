@@ -195,5 +195,5 @@ var wordList = words;
 var grammarTransitions = gt
 var grammar= {numStates: 1, start: 0, end: 0, transitions: gt};
 // This grammar recognizes a few cities names
-var grammars = [{title: "State Capitals", g: grammar}];
+var grammars = [{title: "Colors", g: grammar}];
 var grammarIds = [];
