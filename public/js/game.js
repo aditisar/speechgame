@@ -23,7 +23,24 @@ function newGame(){
 	expectedAnswer = pickRandomState()
 }
 
+function showGame(){
+	$('#homeView').hide();
+	$('#promptView').show();
+	$('#outputView').show();
+}
+
 $( document ).ready(function() {
+	
+	//start with the welcome screen
+	$('#promptView').hide();
+	$('#outputView').hide();
+	$('#debugView').hide();
+
+	$('#startButton').click(function(){
+		console.log('dfhksfjl;')
+		showGame();
+	});
+
 	$('#hintButton').click(function(){
 		$('#hint').toggle();
 	});

@@ -3,6 +3,8 @@
   <head>
     <meta charset="utf-8">
     <title>Speech Games</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
     <!-- Order of including files matters. parsedList and grammar need to go first since the variables stored there are used by index and game .js -->
     <script src="wordList/parsedList.js"></script>
     <script src="wordList/grammar.js"></script>
@@ -15,32 +17,45 @@
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.css" rel="stylesheet">
     <!-- Custom styles for this template -->
-    <link href="css/main.css" rel="stylesheet">
-    <link href="css/soon.css" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-
+    <!-- <link href="css/main.css" rel="stylesheet"> -->
+    <!-- <link href="css/soon.css" rel="stylesheet"> -->
+    <!-- <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet' type='text/css'> -->
+<!--     <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
+ -->
 	  <link rel="stylesheet" type="text/css" href="css/index.css">
   </head>
   <body>
-    <h2>Speech Games!</h2>
-    <p>Your state is:</p>
-    <h3 id="currentState"> Waiting for recognizer ... </h3> 
-    <p> Score: </p>
-    <h1 id="score">0</h1>
-    <button id="hintButton">Hint</button> 
-    <button id="skip">Skip</button> 
-    <p id="hint"></p><br/>
-    <select id="grammars"></select>
-    <button hidden id="startBtn">Start</button>
-    <button hidden id="stopBtn">Stop</button>
-    <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
-    <h2>What We Hear:</h2>
-    <div id="output" style="height:150px;overflow:auto;" >
+
+    <!-- START SCREEN -->
+    <div id="homeView" class="center-block">
+            <h2>Speech Games!</h2>
+            <button class="btn btn-default" id="startButton" type="submit">Start</button>
+            <!-- </form> -->
+    </div> <!-- home -->
+
+    <div id="promptView"> 
+        <p>Your color is:</p>
+        <h3 id="currentState"> Waiting for recognizer ... </h3> 
+        <p> Score: </p>
+        <h1 id="score">0</h1>
+        <button id="hintButton">Hint</button> 
+        <button id="skip">Skip</button> 
+        <p id="hint"></p><br/>
+        <select id="grammars"></select>
+        <button hidden id="startBtn">Start</button>
+        <button hidden id="stopBtn">Stop</button>
+        <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
     </div>
-    <h2>Status</h2>
-    <div id="current-status">Loading page</div>
+
+    <div id="outputView"> 
+        <h2>What We Hear:</h2>
+        <div id="output" style="height:150px;overflow:auto;" >
+    </div>
+
+    <div id="debugView">
+        <h2>Status</h2>
+        <div id="current-status">Loading page</div>
+    </div>
 
     <!-- These are the two JavaScript files you must load in the HTML,
     The recognizer is loaded through a Web Worker -->
