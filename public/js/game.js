@@ -8,6 +8,7 @@ function pickRandomState(){
 	$('#currentState').html(pair[0]);
 	$('#hint').html("The answer is "+pair[1])
 	expectedAnswer = pair[1];
+	$('#colorBlock').css('background-color', expectedAnswer)
 	return pair[1]; //returns the answer
 }
 

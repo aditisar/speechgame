@@ -25,7 +25,7 @@
 	  <link rel="stylesheet" type="text/css" href="css/index.css">
   </head>
   <body>
-
+<div id="container">
     <!-- START SCREEN -->
     <div id="homeView" class="center-block">
             <h2>Speech Games!</h2>
@@ -34,7 +34,18 @@
     </div> <!-- home -->
 
     <div id="promptView"> 
-        <p>Your color is:</p>
+        
+        <div id="p1">
+            <h4> Player 1 </h4>
+            <p id="p1score">0</p>
+        </div>
+        <div id="p2">
+            <h4> Player 2 </h4>
+            <p id="p2score">0</p>
+
+        </div>
+        <p>The color is:</p>
+        <div id="colorBlock" style="width: 100px; height: 100px"></div>
         <h3 id="currentState"> Waiting for recognizer ... </h3> 
         <p> Score: </p>
         <h1 id="score">0</h1>
@@ -45,6 +56,7 @@
         <button hidden id="startBtn">Start</button>
         <button hidden id="stopBtn">Stop</button>
         <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
+    
     </div>
 
     <div id="outputView"> 
@@ -56,7 +68,8 @@
         <h2>Status</h2>
         <div id="current-status">Loading page</div>
     </div>
-
+</div>
+<!-- end container -->
     <!-- These are the two JavaScript files you must load in the HTML,
     The recognizer is loaded through a Web Worker -->
     <script src="js/audioRecorder.js"></script>
