@@ -2,6 +2,7 @@
 //statecapitals is the name of the dictionary
 var p1score = 0;
 var p2score = 0;
+var curPlayer = 0; //1 means player 1, 2 means player 2
 
 var expectedAnswer = "";
 

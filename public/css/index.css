@@ -1,0 +1,18 @@
+#p2 {
+	float: left;
+}
+
+#question {
+	clear: both;
+}
+
+/*centers text within div*/
+.wrapper {
+    text-align:center;
+}
+
+/*centers div within div*/
+#colorBlock {
+    width: 50%;
+    margin: 0 auto;
+}

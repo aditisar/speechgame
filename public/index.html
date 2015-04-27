@@ -25,7 +25,7 @@
 	  <link rel="stylesheet" type="text/css" href="css/index.css">
   </head>
   <body>
-<div id="container">
+<div class="container">
     <!-- START SCREEN -->
     <div id="homeView" class="center-block">
             <h2>Speech Games!</h2>
@@ -35,21 +35,23 @@
 
     <div id="promptView"> 
         
-        <div id="p1">
+        <div id="p1" class="col-md-6 wrapper">
             <h4> Player 1 </h4>
             <p id="p1score">0</p>
             <button id="p1buzzer" class="btn btn-default">P1 Buzzer</button>
         </div>
-        <div id="p2">
+        <div id="p2" class="col-md-6 wrapper">
             <h4> Player 2 </h4>
             <p id="p2score">0</p>
             <button id="p2buzzer" class="btn btn-default">P2 Buzzer</button>
         </div>
+        <br/><br/><br/>
+        <br/><br/><br/>
+        <br/><br/>
+        <div id="question" class="col-md-12 wrapper">
         <p>The color is:</p>
-        <div id="colorBlock" style="width: 100px; height: 100px"></div>
+        <div id="colorBlock" style="width: 200px; height: 200px"></div>
         <h3 id="currentState"> Waiting for recognizer ... </h3> 
-        <p> Score: </p>
-        <h1 id="score">0</h1>
         <button id="hintButton">Hint</button> 
         <button id="skip">Skip</button> 
         <p id="hint"></p><br/>
@@ -57,7 +59,7 @@
         <button hidden id="startBtn">Start</button>
         <button hidden id="stopBtn">Stop</button>
         <span id="recording-indicator" style="border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; width: 20px; height: 20px; background: red;"></span>
-    
+        </div>
     </div>
 
     <div id="outputView"> 
