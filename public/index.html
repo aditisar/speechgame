@@ -29,7 +29,7 @@
     <!-- START SCREEN -->
     <div id="homeView" class="center-block">
             <h2>Speech Games!</h2>
-            <button class="btn btn-default" id="startButton" type="submit">Start</button>
+            <button class="btn btn-default" id="startButton" type="submit" disabled>Start</button>
             <!-- </form> -->
     </div> <!-- home -->
 
@@ -38,11 +38,12 @@
         <div id="p1">
             <h4> Player 1 </h4>
             <p id="p1score">0</p>
+            <button id="p1buzzer" class="btn btn-default">P1 Buzzer</button>
         </div>
         <div id="p2">
             <h4> Player 2 </h4>
             <p id="p2score">0</p>
-
+            <button id="p2buzzer" class="btn btn-default">P2 Buzzer</button>
         </div>
         <p>The color is:</p>
         <div id="colorBlock" style="width: 100px; height: 100px"></div>
@@ -60,7 +61,7 @@
     </div>
 
     <div id="outputView"> 
-        <h2>What We Hear:</h2>
+        <h3>What We Hear:</h3>
         <div id="output" style="height:150px;overflow:auto;" >
     </div>
 

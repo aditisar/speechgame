@@ -1,7 +1,13 @@
 // [['ACCOUNT', 'AH K AW N T'], ['ACT', 'AE K T'], ['ADDITION', 'AH D IH SH AH N'], .... ]
 //statecapitals is the name of the dictionary
-var score = 0;
+var p1score = 0;
+var p2score = 0;
+
 var expectedAnswer = "";
+
+function enableStartButton(){
+	$('#startButton').removeAttr('disabled');
+}
 
 function pickRandomState(){
 	var pair = statecapitals[Math.floor(Math.random()*statecapitals.length)];
@@ -12,15 +18,24 @@ function pickRandomState(){
 	return pair[1]; //returns the answer
 }
 
-function answeredCorrect(){
-	score = score +1; 
-	$('#score').html(score)
+function answeredCorrect(player){
+	if (player == 1) 
+		p1score = p1score+1;
+		$('#p1score').html(p1score)
+
+	if (player == 2) 
+		p2score = p2score+1; 
+		$('#p2score').html(p2score)
+
 	expectedAnswer = pickRandomState()
 }
 
 function newGame(){
-	score = 0
-	$('#score').html(score)
+	p1score = 0
+	p2score = 0
+
+	$('#p1score').html(p1score)
+	$('#p2score').html(p2score)
 	expectedAnswer = pickRandomState()
 }
 
@@ -28,6 +43,8 @@ function showGame(){
 	$('#homeView').hide();
 	$('#promptView').show();
 	$('#outputView').show();
+	$('#debugView').show();
+
 }
 
 $( document ).ready(function() {

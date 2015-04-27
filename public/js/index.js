@@ -75,6 +75,7 @@ var stopRecording = function() {
 // Called once the recognizer is ready
 // We then add the grammars to the input select tag and update the UI
 var recognizerReady = function() {
+     enableStartButton();
      updateGrammars();
      recognizerReady = true;
      updateUI();
