@@ -4,6 +4,12 @@ var p1score = 0;
 var p2score = 0;
 var curPlayer = 0; //1 means player 1, 2 means player 2
 
+//STATE VARIABLE
+// 0 = waiting for a buzzer click
+// 1 = someone buzzed and is trying to answer 
+// 2 = other person is given chance for right answer
+var gameState = 0; 
+
 var expectedAnswer = "";
 
 function enableStartButton(){
@@ -59,6 +65,33 @@ $( document ).ready(function() {
 		console.log('dfhksfjl;')
 		showGame();
 	});
+
+	$('#p1buzzer').click(function(){
+		if (gameState == 0){ //waiting for a buzzer click
+			curPlayer=1;
+			startBtn.click();
+		}
+		else if(gameState == 1){ //someone buzzed and is trying to answer 
+			console.log("Stop tryna buzz p1")
+		} 
+		else if(gameState == 2){ //other person is given chance for right answer
+
+		}
+	});
+
+	$('#p2buzzer').click(function(){
+		if (gameState == 0){ //waiting for a buzzer click
+			curPlayer=2;
+			startBtn.click();
+		}
+		else if(gameState == 1){ //someone buzzed and is trying to answer 
+			console.log("Stop tryna buzz p2")
+		} 
+		else if(gameState == 2){ //other person is given chance for right answer
+			
+		}
+	});
+
 
 	$('#hintButton').click(function(){
 		$('#hint').toggle();

@@ -57,7 +57,6 @@ function startUserMedia(stream) {
   recorderReady = true;
   updateUI();
   updateStatus("Audio recorder ready");
-  startBtn.click();
 };
 
 // This starts recording. We first need to get the id of the grammar to use
@@ -150,9 +149,9 @@ window.onload = function() {
             console.log("expected Answer: " + expectedAnswer)
             if (guess.indexOf(expectedAnswer)!=-1){
               console.log('YOU SHOULD HAVE EARNED A POINT!!!!!')
-              answeredCorrect();
+              answeredCorrect(curPlayer);
               stopBtn.click()
-              startBtn.click()
+              gameState=0; 
             }
             if (e.data.hasOwnProperty('final') &&  e.data.final) newHyp = "Final: " + newHyp;
 
