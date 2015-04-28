@@ -26,14 +26,21 @@ function pickRandomState(){
 }
 
 function answeredCorrect(player){
-	if (player == 1) 
+	if (player == 1) {
+		console.log('player one scores a point' + p1score)
 		p1score = p1score+1;
 		$('#p1score').html(p1score)
-
-	if (player == 2) 
+		$('#output').html('')
+		$('#whoseTurn').html('')
+	}
+	
+	if (player == 2) {
 		p2score = p2score+1; 
 		$('#p2score').html(p2score)
+		$('#output').html('')
+		$('#whoseTurn').html('')
 
+	}
 	expectedAnswer = pickRandomState()
 }
 
@@ -67,8 +74,13 @@ $( document ).ready(function() {
 	});
 
 	$('#p1buzzer').click(function(){
+		console.log("PLAYER 1 BUZZED " + gameState)
+
 		if (gameState == 0){ //waiting for a buzzer click
 			curPlayer=1;
+			gameState=1;
+			$('#whoseTurn').html('<h3> PLAYER 1 GO</h3>')
+
 			startBtn.click();
 		}
 		else if(gameState == 1){ //someone buzzed and is trying to answer 
@@ -80,8 +92,11 @@ $( document ).ready(function() {
 	});
 
 	$('#p2buzzer').click(function(){
+		console.log("PLAYER 2 BUZZED " + gameState)
 		if (gameState == 0){ //waiting for a buzzer click
 			curPlayer=2;
+			gameState=1;
+			$('#whoseTurn').html('<h3> PLAYER 2 GO</h3>')
 			startBtn.click();
 		}
 		else if(gameState == 1){ //someone buzzed and is trying to answer 
