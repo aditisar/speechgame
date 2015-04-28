@@ -25,6 +25,7 @@ function pickRandomState(){
 	return pair[1]; //returns the answer
 }
 
+//So jank
 function convertToArduinoPoints(points, player){
 	if (points==10 && player==1) return 110;
 	if (points==10 && player==2) return 210;
@@ -37,7 +38,9 @@ function answeredCorrect(player){
 	if (player == 1) {
 		console.log('player one scores a point' + p1score)
 		p1score = p1score+1;
-		// INCLUDE PSCORE UPDATE METHOD HERE 
+		serialConvert = convertToArduinoPoints(p1score,1)
+		socket.emit('updateLED', {score:serialConvert});
+ 
 		$('#p1score').html(p1score)
 		$('#output').html('')
 		$('#whoseTurn').html('')
@@ -88,9 +91,9 @@ function countdown() {
 } 
 
 $( document ).ready(function() {
-	
+	console.log('eeyy');
 	var socket = io.connect(':33333/');
-
+	console.log(socket);
 	//start with the welcome screen
 	$('#promptView').hide();
 	$('#outputView').hide();
@@ -158,9 +161,7 @@ $( document ).ready(function() {
 	});
 
 	$('#skip').click(function(){
-		score = score - 0.5
-		$('#score').html(score)
-		expectedAnswer = pickRandomState()
+		expectedAnswer = pickRandomState();
 	});
 
 	$('#startBtn').closest('.ui-btn').hide();

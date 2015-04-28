@@ -9,43 +9,40 @@ var express = require('express'),
 
 
 
-var p1Port = new SerialPort('/dev/tty.usbmodem1411', {
-   baudRate: 9600,
-   // look for return and newline at the end of each data packet:
-   parser: serialport.parsers.readline("\r\n")
- });
+// var p1Port = new SerialPort('/dev/tty.usbmodem1411', {
+//    baudRate: 9600,
+//    // look for return and newline at the end of each data packet:
+//    parser: serialport.parsers.readline("\r\n")
+//  });
 
 
-function showPortOpen() {
-   console.log('port open. Data rate: ' + p1Port.options.baudRate);
-}
-function showPortClose() {
-   console.log('port closed.');
-}
-function showError(error) {
-   console.log('Serial port error: ' + error);
-}
-function parseP1Data(data) {
-  console.log(data);
-  if (data == 100) {
-    //Send a request to the client side to click buzzer 1. 
-    a = 110;
-    p1Port.write(Buffer([a]));
-    console.log('asdkjf '+a)
+// function showPortOpen() {
+//    console.log('port open. Data rate: ' + p1Port.options.baudRate);
+// }
+// function showPortClose() {
+//    console.log('port closed.');
+// }
+// function showError(error) {
+//    console.log('Serial port error: ' + error);
+// }
+// function parseP1Data(data) {
+//   console.log(data);
+//   if (data == 100) {
+//     console.log("Buzzer 1 pressed!")
+//     //Send a request to the client side to click buzzer 1. 
+//   }  
 
-  }  
+//   if (data == 200) {
+//     console.log("Buzzer 2 pressed!");
+//     //Send a request to the client side to click buzzer 2. 
+//     // This might be moved to parseP2Data when we add another arduino connected to diff serial port
+//   }
+// }
 
-  if (data == 200) {
-    console.log("Buzzer 2 pressed!");
-    //Send a request to the client side to click buzzer 2. 
-    // This might be moved to parseP2Data when we add another arduino connected to diff serial port
-  }
-}
-
-p1Port.on('open', showPortOpen);
-p1Port.on('close', showPortClose);
-p1Port.on('error', showError);
-p1Port.on('data', parseP1Data)
+// p1Port.on('open', showPortOpen);
+// p1Port.on('close', showPortClose);
+// p1Port.on('error', showError);
+// p1Port.on('data', parseP1Data)
 
 //when you get client side data
 
