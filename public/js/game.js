@@ -61,6 +61,23 @@ function showGame(){
 
 }
 
+
+function countdown() {
+  seconds = $('#countdown').html();
+  seconds = parseInt(seconds);
+  if (seconds == 0) {
+    stopBtn.click();
+    gameState=0; //return to anyone buzzes once 3 secs are up
+    $('#countdown').hide();
+    $('#whoseTurn').html('');
+    window.clearTimeout(a);
+    a=0;
+  }
+  seconds--;
+  $('#countdown').html(seconds);
+  a = setTimeout(countdown, 1000);
+} 
+
 $( document ).ready(function() {
 	
 	//start with the welcome screen
@@ -69,8 +86,9 @@ $( document ).ready(function() {
 	$('#debugView').hide();
 
 	$('#startButton').click(function(){
-		console.log('dfhksfjl;')
 		showGame();
+		$('#countdown').hide();
+
 	});
 
 	$('#p1buzzer').click(function(){
@@ -80,7 +98,9 @@ $( document ).ready(function() {
 			curPlayer=1;
 			gameState=1;
 			$('#whoseTurn').html('<h3> PLAYER 1 GO</h3>')
-
+			$('#countdown').show();
+			$('#countdown').html('3');
+			countdown();
 			startBtn.click();
 		}
 		else if(gameState == 1){ //someone buzzed and is trying to answer 
@@ -97,6 +117,9 @@ $( document ).ready(function() {
 			curPlayer=2;
 			gameState=1;
 			$('#whoseTurn').html('<h3> PLAYER 2 GO</h3>')
+			$('#countdown').show();
+			$('#countdown').html('3');
+			countdown();
 			startBtn.click();
 		}
 		else if(gameState == 1){ //someone buzzed and is trying to answer 
