@@ -25,10 +25,19 @@ function pickRandomState(){
 	return pair[1]; //returns the answer
 }
 
+function convertToArduinoPoints(points, player){
+	if (points==10 && player==1) return 110;
+	if (points==10 && player==2) return 210;
+	if (player==1) return points+10;
+	if (player==2) return points+20;
+}
+
+
 function answeredCorrect(player){
 	if (player == 1) {
 		console.log('player one scores a point' + p1score)
 		p1score = p1score+1;
+		// INCLUDE PSCORE UPDATE METHOD HERE 
 		$('#p1score').html(p1score)
 		$('#output').html('')
 		$('#whoseTurn').html('')
@@ -80,6 +89,8 @@ function countdown() {
 
 $( document ).ready(function() {
 	
+	var socket = io.connect(':33333/');
+
 	//start with the welcome screen
 	$('#promptView').hide();
 	$('#outputView').hide();
@@ -89,6 +100,17 @@ $( document ).ready(function() {
 		showGame();
 		$('#countdown').hide();
 
+	});
+
+    //this is called when we're waiting for another player
+    socket.on('press buzz 1', function(){
+    	//press appropriate buttoons
+    });
+
+
+	$('#p1buzzer').click(function(){
+		//fix
+		socket.emit('startTimer');
 	});
 
 	$('#p1buzzer').click(function(){
