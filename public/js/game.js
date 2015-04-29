@@ -91,10 +91,9 @@ function countdown() {
 } 
 
 $( document ).ready(function() {
-	console.log('eeyy');
+	//why doesn't this work???
 	var socket = io.connect(':33333/');
-	console.log(socket);
-	//start with the welcome screen
+//start with the welcome screen
 	$('#promptView').hide();
 	$('#outputView').hide();
 	$('#debugView').hide();
@@ -105,16 +104,11 @@ $( document ).ready(function() {
 
 	});
 
-    //this is called when we're waiting for another player
-    socket.on('press buzz 1', function(){
-    	//press appropriate buttoons
+
+
+    socket.on('pressb1', function(){
+    	$('#p1buzzer').click();
     });
-
-
-	$('#p1buzzer').click(function(){
-		//fix
-		socket.emit('startTimer');
-	});
 
 	$('#p1buzzer').click(function(){
 		console.log("PLAYER 1 BUZZED " + gameState)
