@@ -19,9 +19,9 @@ function enableStartButton(){
 function pickRandomState(){
 	var pair = statecapitals[Math.floor(Math.random()*statecapitals.length)];
 	$('#currentState').html(pair[0]);
-	$('#hint').html("The answer is "+pair[1])
+	$('#hint').html("The answer is "+pair[1]);
 	expectedAnswer = pair[1];
-	$('#colorBlock').css('background-color', expectedAnswer)
+	$('#colorBlock').css('background-color', expectedAnswer);
 	return pair[1]; //returns the answer
 }
 
@@ -34,27 +34,30 @@ function convertToArduinoPoints(points){
 
 function answeredCorrect(player){
 	if (player == 1) {
-		console.log('player one scores a point' + p1score)
+		console.log('player one scores a point' + p1score);
 		p1score = p1score+1;
-		serialConvert = convertToArduinoPoints(p1score)
+		serialConvert = convertToArduinoPoints(p1score);
 		socket.emit('updateLED1', {score:serialConvert});
  
-		$('#p1score').html(p1score)
-		$('#output').html('')
-		$('#whoseTurn').html('')
+		$('#p1score').html(p1score);
+		$('#output').html('');
+		$('#whoseTurn').html('');
+		$('#p1').removeClass('pulse');
 	}
 	
 	if (player == 2) {
 		p2score = p2score+1; 
-		serialConvert = convertToArduinoPoints(p2score)
+		serialConvert = convertToArduinoPoints(p2score);
 		socket.emit('updateLED2', {score:serialConvert});
 
 		$('#p2score').html(p2score)
 		$('#output').html('')
 		$('#whoseTurn').html('')
+		$('#p2').removeClass('pulse');
+
 
 	}
-	expectedAnswer = pickRandomState()
+	expectedAnswer = pickRandomState();
 }
 
 function newGame(){
@@ -63,7 +66,7 @@ function newGame(){
 
 	$('#p1score').html(p1score)
 	$('#p2score').html(p2score)
-	expectedAnswer = pickRandomState()
+	expectedAnswer = pickRandomState();
 }
 
 function showGame(){
@@ -78,15 +81,17 @@ function showGame(){
 function countdown() {
   seconds = $('#countdown').html();
   seconds = parseInt(seconds);
+  seconds--;
   if (seconds == 0) {
     stopBtn.click();
     gameState=0; //return to anyone buzzes once 3 secs are up
     $('#countdown').hide();
     $('#whoseTurn').html('');
+    $('#p1').removeClass('pulse');
+    $('#p2').removeClass('pulse');
     window.clearTimeout(a);
     a=0;
   }
-  seconds--;
   $('#countdown').html(seconds);
   a = setTimeout(countdown, 1000);
 } 
@@ -120,7 +125,9 @@ $( document ).ready(function() {
 		if (gameState == 0){ //waiting for a buzzer click
 			curPlayer=1;
 			gameState=1;
-			$('#whoseTurn').html('<h3> PLAYER 1 GO</h3>')
+			$('#p1').addClass('pulse');
+			$('#whoseTurn').html('<h3> PLAYER 1 GO</h3>');
+
 			$('#countdown').show();
 			$('#countdown').html('3');
 			countdown();
@@ -139,14 +146,15 @@ $( document ).ready(function() {
 		if (gameState == 0){ //waiting for a buzzer click
 			curPlayer=2;
 			gameState=1;
-			$('#whoseTurn').html('<h3> PLAYER 2 GO</h3>')
+			$('#p2').addClass('pulse');
+			$('#whoseTurn').html('<h3> PLAYER 2 GO</h3>');
 			$('#countdown').show();
 			$('#countdown').html('3');
 			countdown();
 			startBtn.click();
 		}
 		else if(gameState == 1){ //someone buzzed and is trying to answer 
-			console.log("Stop tryna buzz p2")
+			console.log("Stop tryna buzz p2");
 		} 
 		else if(gameState == 2){ //other person is given chance for right answer
 			
