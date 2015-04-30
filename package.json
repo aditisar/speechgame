@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "express": "4.8",
-    "morgan": "1.2"
+    "morgan": "1.2",
+    "ws": "^0.7.1"
   },
   "devDependencies": {},
   "bundleDependencies": [],

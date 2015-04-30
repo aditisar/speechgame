@@ -1,6 +1,51 @@
 var express = require('express'),
+    http = require('http'), 
     morgan  = require('morgan'),
-    path = require('path');
+    path = require('path'),
+    serialport = require('serialport'),// include the library
+    SerialPort = require("serialport").SerialPort,
+    sio =require('socket.io'),
+    sockets = require('./serverSocket.js');
+
+
+
+// var p1Port = new SerialPort('/dev/tty.usbmodem1411', {
+//    baudRate: 9600,
+//    // look for return and newline at the end of each data packet:
+//    parser: serialport.parsers.readline("\r\n")
+//  });
+
+
+// function showPortOpen() {
+//    console.log('port open. Data rate: ' + p1Port.options.baudRate);
+// }
+// function showPortClose() {
+//    console.log('port closed.');
+// }
+// function showError(error) {
+//    console.log('Serial port error: ' + error);
+// }
+// function parseP1Data(data) {
+//   console.log(data);
+//   if (data == 100) {
+//     console.log("Buzzer 1 pressed!")
+//     //Send a request to the client side to click buzzer 1. 
+//   }  
+
+//   if (data == 200) {
+//     console.log("Buzzer 2 pressed!");
+//     //Send a request to the client side to click buzzer 2. 
+//     // This might be moved to parseP2Data when we add another arduino connected to diff serial port
+//   }
+// }
+
+// p1Port.on('open', showPortOpen);
+// p1Port.on('close', showPortClose);
+// p1Port.on('error', showError);
+// p1Port.on('data', parseP1Data)
+
+//when you get client side data
+
 
 // Create a class that will be our main application
 var SimpleStaticServer = function() {
@@ -27,12 +72,16 @@ var SimpleStaticServer = function() {
      */
     self.ipaddress = process.env.OPENSHIFT_NODEJS_IP || "127.0.0.1";
     self.port      = process.env.OPENSHIFT_NODEJS_PORT || 33333;
+    var httpServer = http.Server(self.app);
+    var io = sio(httpServer);
 
     //  Start listening on the specific IP and PORT
-    self.app.listen(self.port, self.ipaddress, function() {
+    httpServer.listen(self.port, self.ipaddress, function() {
       console.log('%s: Node server started on %s:%d ...',
                         Date(Date.now() ), self.ipaddress, self.port);
     });
+  sockets.init(io);
+
   };
 }; 
 
@@ -42,4 +91,8 @@ var SimpleStaticServer = function() {
  */
 var sss = new SimpleStaticServer();
 sss.start();
+
+
+
+
 
