@@ -26,11 +26,9 @@ function pickRandomState(){
 }
 
 //So jank
-function convertToArduinoPoints(points, player){
-	if (points==10 && player==1) return 110;
-	if (points==10 && player==2) return 210;
-	if (player==1) return points+10;
-	if (player==2) return points+20;
+function convertToArduinoPoints(points){
+	if (points==10) return 110;
+	return points+10;
 }
 
 
@@ -38,8 +36,8 @@ function answeredCorrect(player){
 	if (player == 1) {
 		console.log('player one scores a point' + p1score)
 		p1score = p1score+1;
-		serialConvert = convertToArduinoPoints(p1score,1)
-		socket.emit('updateLED', {score:serialConvert});
+		serialConvert = convertToArduinoPoints(p1score)
+		socket.emit('updateLED1', {score:serialConvert});
  
 		$('#p1score').html(p1score)
 		$('#output').html('')
@@ -48,6 +46,9 @@ function answeredCorrect(player){
 	
 	if (player == 2) {
 		p2score = p2score+1; 
+		serialConvert = convertToArduinoPoints(p2score)
+		socket.emit('updateLED2', {score:serialConvert});
+
 		$('#p2score').html(p2score)
 		$('#output').html('')
 		$('#whoseTurn').html('')
@@ -108,6 +109,9 @@ $( document ).ready(function() {
 
     socket.on('pressb1', function(){
     	$('#p1buzzer').click();
+    });
+    socket.on('pressb2', function(){
+    	$('#p2buzzer').click();
     });
 
 	$('#p1buzzer').click(function(){

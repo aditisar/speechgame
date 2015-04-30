@@ -10,11 +10,18 @@ var p1Port = new SerialPort('/dev/tty.usbmodem1411', {
    parser: serialport.parsers.readline("\r\n")
  });
 
+var p2Port = new SerialPort('/dev/tty.usbmodem1421', {
+   baudRate: 9600,
+   // look for return and newline at the end of each data packet:
+   parser: serialport.parsers.readline("\r\n")
+ });
+
 function showError(error) {
 	console.log('Serial port error: ' + error);
 }
 
 p1Port.on('error', showError);
+p2Port.on('error', showError);
 
 
 exports.init = function(io) {
@@ -36,10 +43,13 @@ exports.init = function(io) {
 		console.log("currentlyOpen = "+currentlyOpen);
 		console.log("currentUsers = "+currentUsers);
 		
-		
-		//Since there is a max of two players at a time, only add new client if there is space
-		socket.on('updateLED', function(data){
+		socket.on('updateLED1', function(data){
     		p1Port.write(Buffer([data.score]));
+    		console.log('Wrote '+data.score + ' to serial.')
+		});
+
+		socket.on('updateLED2', function(data){
+    		p2Port.write(Buffer([data.score]));
     		console.log('Wrote '+data.score + ' to serial.')
 		});
 		
@@ -65,17 +75,23 @@ exports.init = function(io) {
 		    //Send a request to the client side to click buzzer 1.
 		    socket.emit('pressb1'); 
 		  }  
-		
-		  if (data == 200) {
-		    console.log("Buzzer 2 pressed!");
-		    //Send a request to the client side to click buzzer 2. 
-		    // This might be moved to parseP2Data when we add another arduino connected to diff serial port
-		  }
 		}
+		function parseP2Data(data) {
+		  //console.log(data);
+		  if (data == 100) {
+		    console.log("Buzzer 2 pressed!")
+		    //Send a request to the client side to click buzzer 1.
+		    socket.emit('pressb2'); 
+		  }  
+		}
+
 		
 		p1Port.on('open', showPortOpen);
 		p1Port.on('close', showPortClose);
-		p1Port.on('data', parseP1Data);		
+		p1Port.on('data', parseP1Data);	
+		p2Port.on('open', showPortOpen);
+		p2Port.on('close', showPortClose);
+		p2Port.on('data', parseP2Data);		
 
 
 
